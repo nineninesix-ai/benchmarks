@@ -48,6 +48,10 @@ services:
     env_file: .env
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-benchmarks}
+      # The image runs as uid 65532 and cannot create the default relative
+      # `arena-audio/` under /app, so startup dies on PermissionError. Only
+      # used when no GCS bucket or CDN origin is configured, i.e. locally.
+      ARENA_AUDIO_DIR: /tmp/arena-audio
     ports:
       - "8000:8080"
     depends_on:
