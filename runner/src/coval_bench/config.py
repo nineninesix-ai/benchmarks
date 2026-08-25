@@ -120,6 +120,10 @@ class Settings(BaseSettings):
     speechify_api_key: SecretStr | None = None
     fluxions_api_key: SecretStr | None = None
     deepdub_api_key: SecretStr | None = None
+    nineninesix_api_key: SecretStr | None = None
+    # Point the Nineninesix TTS provider at a candidate deployment instead of the
+    # production API; empty uses the provider's own default.
+    nineninesix_base_url: str = ""
 
     # Azure region hosting the Speech resource (e.g. "eastus"). Determines the
     # region-scoped WebSocket host; required only when the Azure STT provider runs.

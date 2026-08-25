@@ -66,6 +66,7 @@ def fake_settings(tmp_path: Path) -> Settings:
         soniox_api_key=SecretStr("test-soniox-key"),
         azure_api_key=SecretStr("test-azure-key"),
         azure_region="eastus",
+        nineninesix_api_key=SecretStr("test-nineninesix-key"),
     )
 
 
