@@ -1114,6 +1114,33 @@ MODEL_REGISTRY: list[RegisteredModel] = [
         region="us",
         status=_RETIRED,
     ),
+    # Multilingual through the voice, not a request field: each voice carries
+    # its own language (en-US/en-GB/es-MX/pt-BR/nl-NL), and the wire protocol
+    # has no `language` parameter. _STREAM covers the `continue: true` turn
+    # model (sentences streamed into one context); cloning is POST /voices/clone.
+    RegisteredModel(
+        benchmark=_TTS,
+        provider="nineninesix",
+        model="gepard-1.0",
+        voice="9b2cd515-a3cf-4a83-a104-89da1ab1ba05",
+        voices=(
+            Voice(
+                id="9b2cd515-a3cf-4a83-a104-89da1ab1ba05",
+                gender=Gender.FEMALE,
+                name="Cara",
+                accent="en-US",
+            ),
+            Voice(
+                id="993ba5f6-8d00-414e-99cd-01df61452b38",
+                gender=Gender.MALE,
+                name="Jason",
+                accent="en-US",
+            ),
+        ),
+        tags=(_STREAMING, _MULTI, _STREAM, _CLONE),
+        region="us",
+        status=_ACTIVE,
+    ),
     #######
     # S2S #
     #######
