@@ -196,6 +196,25 @@ class AggregatesResponse(BaseModel):
     series: list[SeriesPoint]
 
 
+class TimelinePoint(BaseModel):
+    """One compact chart point for a provider/model/metric bucket."""
+
+    provider: str
+    model: str
+    metric_type: str
+    scheduled_at: datetime
+    value: float
+
+
+class TimelineResponse(BaseModel):
+    """Response schema for GET /v1/results/timeline."""
+
+    benchmark: BenchmarkLiteral
+    window: WindowLiteral
+    dataset: str
+    points: list[TimelinePoint]
+
+
 class DatasetAggregates(BaseModel):
     """Per-model stats for one dataset — one block of the by-dataset response."""
 
@@ -366,10 +385,10 @@ class RevealOut(BaseModel):
 
 
 class TagOut(BaseModel):
-    """A MODE or FEATURES vocabulary entry."""
+    """A FEATURES vocabulary entry."""
 
     value: str = Field(min_length=1)
-    category: Literal["mode", "features"]
+    category: Literal["features"]
     label: str = Field(min_length=1)
 
 

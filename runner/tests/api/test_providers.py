@@ -174,7 +174,7 @@ async def test_early_access_flag_marks_only_embargoed_rows(client: AsyncClient) 
         for m in entry["models"]
         if m["early_access"]
     }
-    # Registry-derived, not embargoed_pairs(): retired board keys stay embargoed
+    # Registry-derived, not embargoed_pairs(MODEL_REGISTRY): retired board keys stay embargoed
     # for stored artefacts but are not registry entries, so they never appear here.
     assert flagged == {
         (m.provider, m.model) for m in MODEL_REGISTRY if m.status is ModelStatus.EARLY_ACCESS
@@ -225,7 +225,6 @@ async def test_tag_categories_metadata(client: AsyncClient) -> None:
     categories = data["tag_categories"]
     assert [c["category"] for c in categories] == [
         "type",
-        "mode",
         "host",
         "creator",
         "features",
@@ -239,7 +238,7 @@ async def test_tag_categories_metadata(client: AsyncClient) -> None:
     # Host/creator values are provider ids the frontend formats itself.
     assert by_category["host"]["provider_valued"] is True
     assert by_category["creator"]["provider_valued"] is True
-    assert by_category["mode"]["provider_valued"] is False
+    assert by_category["features"]["provider_valued"] is False
 
     # groq hosts canopylabs' orpheus, so the creator override drives creator and source.
     groq_entry = next(e for e in data["tts"] if e["provider"] == "groq")
