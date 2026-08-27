@@ -96,6 +96,7 @@ class Settings(BaseSettings):
     hume_api_key: SecretStr | None = None
     rime_api_key: SecretStr | None = None
     gladia_api_key: SecretStr | None = None
+    gemini_api_key: SecretStr | None = None
     gradium_api_key: SecretStr | None = None
     gradium_tts_api_key: SecretStr | None = None
     mistral_api_key: SecretStr | None = None
@@ -124,6 +125,8 @@ class Settings(BaseSettings):
     # Point the Nineninesix TTS provider at a candidate deployment instead of the
     # production API; empty uses the provider's own default.
     nineninesix_base_url: str = ""
+    zoom_api_key: SecretStr | None = None
+    zoom_api_secret: SecretStr | None = None
 
     # Azure region hosting the Speech resource (e.g. "eastus"). Determines the
     # region-scoped WebSocket host; required only when the Azure STT provider runs.
@@ -133,6 +136,7 @@ class Settings(BaseSettings):
     # pre-launch model ids, so they live in config (``.env`` locally, Secret
     # Manager in prod) rather than hardcoded in the provider modules.
     baseten_whisper_url: str | None = None  # STT (Whisper Large V3)
+    baseten_qwen_asr_url: str | None = None  # STT (Qwen3-ASR)
     baseten_qwen_url: str | None = None  # TTS (Qwen3-TTS)
 
     alibaba_tts_url: str | None = None
@@ -147,6 +151,11 @@ class Settings(BaseSettings):
     # --- Coval API (S2S fetch job) ---
     # X-API-Key for the Coval API. SecretStr so it never lands in a log.
     coval_api_key: SecretStr | None = None
+    # Voice-orchestration variants. Optional: a variant whose key is absent is
+    # skipped and logged rather than failing the run, matching the provider-key
+    # convention used by the STT/TTS orchestrator.
+    vapi_api_key: SecretStr | None = None
+    telnyx_api_key: SecretStr | None = None
     coval_api_base: str = "https://api.coval.dev/v1"
     # The S2S latency metric id + per-provider Coval agent ids (opaque, not secret).
     coval_s2s_latency_metric_id: str | None = None

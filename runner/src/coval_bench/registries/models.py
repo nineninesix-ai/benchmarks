@@ -345,6 +345,18 @@ MODEL_REGISTRY: list[RegisteredModel] = [
         region="us",
         status=_EARLY_ACCESS,
     ),
+    RegisteredModel(
+        benchmark=_STT,
+        provider="baseten",
+        model="qwen3-asr-1.7b",
+        creator="alibaba",
+        tags=(_MULTI, _VAD),
+        source=Source.DEDICATED_INFERENCE,
+        licensing=_OPEN,
+        on_prem=True,
+        region="us",
+        status=_EARLY_ACCESS,
+    ),
     # Azure AI Speech real-time (raw WebSocket, conversation mode).
     RegisteredModel(
         benchmark=_STT,
@@ -373,6 +385,16 @@ MODEL_REGISTRY: list[RegisteredModel] = [
         on_prem=True,
         region="us",
         status=_ACTIVE,
+    ),
+    # Gemini Live API (API-key auth), not Cloud Speech v2 like the `google` provider.
+    RegisteredModel(
+        benchmark=_STT,
+        provider="gemini",
+        model="gemini-3.5-transcribe-live",
+        creator="google",
+        tags=(_MULTI, _VAD, _KEYTERM),
+        region="us",
+        status=_EARLY_ACCESS,
     ),
     RegisteredModel(
         benchmark=_STT,
@@ -477,6 +499,14 @@ MODEL_REGISTRY: list[RegisteredModel] = [
         tags=(_MULTI, _DIAR),
         region="us",
         status=_RETIRED,
+    ),
+    RegisteredModel(
+        benchmark=_STT,
+        provider="zoom",
+        model="scribe",
+        tags=(_MULTI, _VAD),
+        region="us",
+        status=_EARLY_ACCESS,
     ),
     #######
     # TTS #
